@@ -1,7 +1,7 @@
 # X-Guard: oneM2M foreign-object inspection for a conveyor
 
 X-Guard checks products on a conveyor belt for foreign objects and pushes bad ones off the line.
-An Arduino with two IR sensors and an SG90 servo watches the belt, a gateway connects it to an
+An Arduino with two IR sensors and an MG996R servo watches the belt, a gateway connects it to an
 ACME MN-CSE, a camera AE uploads a photo of each product, a YOLOv8n model (meant to run on MEC)
 judges it, and the rejector and a Streamlit dashboard act on the result.
 
@@ -9,7 +9,7 @@ None of the programs call each other directly. Each one writes to the MN-CSE and
 needs through subscription notifications. The data formats follow our "X-Guard final system spec".
 
 ```
-arduino/                  hardware team's Arduino code (2026-11-15): S1/S2 E18-D80NK, queue, SG90 rejector
+arduino/                  hardware team's Arduino code (2026-11-15): S1/S2 E18-D80NK, queue, MG996R rejector
   src/main.cpp            PlatformIO build (same content as xguard_2sensor.ino)
   xguard_2sensor/         Arduino IDE sketch
 cse/acme.ini              ACME MN-CSE config (MQTT on)
@@ -105,7 +105,7 @@ The pin-out is from the hardware team's code of 2026-11-15 (see `arduino/HARDWAR
 |---|---|---|
 | D2 | E18-D80NK #1 (S1) | entry; sends `DET,seq,0` when a product comes in (internal pull-up) |
 | D3 | E18-D80NK #2 (S2) | just before the rejector; handles the product at the head of the queue |
-| D9 | SG90 servo | powered from the Arduino 5V/GND; only driven while pushing, then detached |
+| D9 | MG996R servo | powered from the Arduino 5V/GND; only driven while pushing, then detached |
 | D13 | onboard LED | on = running, blinking = stopped, off briefly while pushing |
 | - | no e-stop button | use the Stop button on the dashboard (STOP command) |
 
