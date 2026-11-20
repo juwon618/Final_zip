@@ -55,7 +55,7 @@ def load_classes():
     if CLASSES_PATH.exists():
         names = [l.strip() for l in CLASSES_PATH.read_text(encoding="utf-8").splitlines() if l.strip()]
         return dict(enumerate(names))
-    return {0: "stone", 1: "metal", 2: "plastic"}   # our dataset classes, same order as obj.names
+    return {0: "defect"}   # our dataset classes, same order as obj.names
 
 
 # ====================================================================== pre/post-processing
